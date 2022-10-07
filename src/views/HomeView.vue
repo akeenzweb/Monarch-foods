@@ -6,7 +6,7 @@
         <li><img class="bot-profile" src="../assets/images/bot1.jpg"></li>
         <li><ul class="inner-ul">
           <li>Lucy</li>
-          <li>Online Now</li>
+          <li @click="testLogin">Online Now</li>
         </ul></li>
       </ul>
     </div>
@@ -28,7 +28,12 @@ export default {
     //HelloWorld
     // chatBox1,
     ChatBox1
-}
+  },
+  methods: {
+    testLogin() {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
