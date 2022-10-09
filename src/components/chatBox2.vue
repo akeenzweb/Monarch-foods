@@ -22,6 +22,7 @@
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
                     <h2 class="price">${{item.price}}</h2><br>
                     <button>Add to Cart</button>
+                    <h5 class="view" @click="viewClickedFilteredMenu(index); modal = !modal">View</h5>
                 </li>
             </transition-group>
             <!--<ul class="menu-list" style="margin-top:20px">
@@ -47,6 +48,7 @@
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
                     <h2 class="price">${{item.price}}</h2><br>
                     <button>Add to Cart</button>
+                    <h5 class="view" @click="viewClickedMenu(index); modal = !modal">View</h5>
                 </li>
             </ul>
         </div>
@@ -56,14 +58,19 @@
             <input v-model="userInput" type="text" @keyup.enter="sendMessage(); analyzeMessage();"><input type="submit" value="send" @click="sendMessage(); analyzeMessage();" >
         </div>-->
 
+        <!--Modal-->
+        <transition name="modal"><ViewModal @closeModal = "modal =!modal" v-if="modal" :itemViewed = viewItemModal /></transition>
     </div>
 </template>
 
 <script>
+    import ViewModal from "../components/viewMenuModal.vue"
     export default {
         data() {
             return {
+                modal: false,
                 active: [],
+                viewMenuModalArray: [],
                 categories: ['Pasteries', 'Pasta', 'Drinks', 'Breakfast', 'Continental'],
                 categories2: [],
                 selectedCategory: null,
@@ -120,14 +127,14 @@
                         price: 3500,
                         category: 'Pasteries',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1J2N7x.83ec1675a71906cdd4ff06a33e8d51ac.jpg'
+                        image: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGFtJTIwYnVyZ2VyJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
                     },
                     {
                         name: 'Coffee',
                         price: 1000,
                         category: 'Drinks',
                         description: 'It is very tasty and Creamy',
-                        image: 'https://i.im.ge/2022/10/07/1J2Wvh.a797d3d7834f0276aab6b30aa839ec4f.jpg'
+                        image: 'https://images.unsplash.com/photo-1422056244210-46cc641fb1fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw3NTk0NTV8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'
                     },
                     {
                         name: 'Smoothie ',
@@ -151,11 +158,15 @@
                 chatMessages: [
                     {status: "bot", message:  "Choose a category"}
                 ],
+                viewItemModal: {}
             }
         },
-        mounted () {
-            this.categories2 = this.categories.slice(1)
+        components: {
+            ViewModal
         },
+        //mounted () {
+        //    this.categories2 = this.categories.slice(1)
+        //},
         methods: {
             sendMessage(){
 
@@ -173,6 +184,17 @@
                 //The code below assigns the category selected to a variable and this varable filters the menu array to create a new array that would be displayed when you click the category
                 this.selectedCategory = this.categories[index]
                 this.filteredMenu = this.menu.filter(m => m.category == this.selectedCategory)
+            },
+            viewClickedFilteredMenu(index) {
+                // this.viewMenuModalArray[index] = this.filteredMenu[index]
+                // alert(this.viewMenuModalArray[index].name)
+                this.viewItemModal = this.filteredMenu[index]
+            },
+            viewClickedMenu(index) {
+                // this.viewMenuModalArray[index] = this.menu[index]
+                // alert(this.viewMenuModalArray[index].name)
+                this.viewItemModal = this.menu[index]
+                // alert(this.viewItemModal.name)
             }
         }
     }
@@ -301,6 +323,29 @@ input[type='submit'] {
 }
 
 
+.modal-enter-from {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.modal-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.modal-leave-active {
+  transition: all 0.8s ease;
+}
+
+.modal-leave-from {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.modal-leave-to {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.modal-enter-active {
+  transition: all 0.8s ease;
+}
 
 
 
@@ -387,6 +432,14 @@ input[type='submit'] {
     font-size: 16px;
     font-style: italic;
     margin-left: 10px;
+}
+.menu-list .view {
+    color: rgb(216, 216, 216);
+    margin-top: -5px;
+    font-size: 16px;
+    font-style: italic;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 435px) {
