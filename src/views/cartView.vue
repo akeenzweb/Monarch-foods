@@ -8,11 +8,11 @@
             <li>Lucy</li>
             <li>Online Now</li>
           </ul></li>
-          <router-link to="/cart"><li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li></router-link>
+          <li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li>
         </ul>
       </div>
       <div>
-        <ChatBox2></ChatBox2>
+        <CartBlock />
       </div>
     </div>
   </template>
@@ -21,14 +21,14 @@
   // @ is an alias to /src
   //import HelloWorld from '@/components/HelloWorld.vue'
   //import chatBox1 from '../components/chatBox1.vue'
-  import ChatBox2 from '../components/chatBox2.vue'
+  import CartBlock from '../components/cartComponent.vue'
 
   export default {
-    name: 'HomeView',
+    name: 'CartView',
     components: {
       //HelloWorld
       // chatBox1,
-      ChatBox2
+      CartBlock
   }
   }
   </script>

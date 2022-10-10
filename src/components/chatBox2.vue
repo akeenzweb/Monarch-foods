@@ -21,7 +21,7 @@
                     <h1 class="image-box"><img :src="item.image"></h1><br>
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
                     <h2 class="price">${{item.price}}</h2><br>
-                    <button>Add to Cart</button>
+                    <button @click="addToCartFiltered(index)">Add to Cart</button>
                     <h5 class="view" @click="viewClickedFilteredMenu(index); modal = !modal">View</h5>
                 </li>
             </transition-group>
@@ -47,12 +47,21 @@
                     <h1 class="image-box"><img :src="item.image"></h1><br>
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
                     <h2 class="price">${{item.price}}</h2><br>
-                    <button>Add to Cart</button>
+                    <button @click="addToCart(index)">Add to Cart</button>
                     <h5 class="view" @click="viewClickedMenu(index); modal = !modal">View</h5>
                 </li>
             </ul>
         </div>
 
+        <transition name="modal">
+            <div v-if="addedToCart" class="added-to-cart">
+                <ul>
+                    <li style="display:inline-block"><img style="width:50px;height:50px;border-radius:50%" src="../assets/images/bot1.jpg"></li>
+                    <li style="display:inline-block">{{viewItemModal.name}} is added to your Cart</li>
+                </ul>
+
+            </div>
+        </transition>
 
         <!--<div class="form">
             <input v-model="userInput" type="text" @keyup.enter="sendMessage(); analyzeMessage();"><input type="submit" value="send" @click="sendMessage(); analyzeMessage();" >
@@ -69,6 +78,7 @@
         data() {
             return {
                 modal: false,
+                addedToCart: false,
                 active: [],
                 viewMenuModalArray: [],
                 categories: ['Pasteries', 'Pasta', 'Drinks', 'Breakfast', 'Continental'],
@@ -195,6 +205,24 @@
                 // alert(this.viewMenuModalArray[index].name)
                 this.viewItemModal = this.menu[index]
                 // alert(this.viewItemModal.name)
+            },
+            addToCartFiltered(index) {
+                this.viewItemModal = this.filteredMenu[index]
+                this.$store.commit("addToCart", this.viewItemModal)
+                console.log(this.$store.state.cart[0].name)
+                this.addedToCart = true
+                setTimeout(()=> {
+                    this.addedToCart = false
+                }, 3000)
+            },
+            addToCart(index) {
+                this.viewItemModal = this.menu[index]
+                this.$store.commit("addToCart", this.viewItemModal)
+                console.log(this.$store.state.cart[0].name)
+                this.addedToCart = true
+                setTimeout(()=> {
+                    this.addedToCart = false
+                }, 3000)
             }
         }
     }
@@ -349,6 +377,9 @@ input[type='submit'] {
 
 
 
+
+
+
 .category {
     margin-top: -50px;
   overflow-x: auto;
@@ -440,6 +471,23 @@ input[type='submit'] {
     font-style: italic;
     margin-left: 10px;
     cursor: pointer;
+}
+.added-to-cart {
+    text-align: center;
+    /*border: 2px solid green;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 40px;
+    background: #fff;
+    /*width: 80%;*/
+    padding-left: 10px;
+    padding-right: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 @media screen and (max-width: 435px) {

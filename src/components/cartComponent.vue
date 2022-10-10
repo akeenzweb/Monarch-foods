@@ -1,0 +1,182 @@
+<template>
+    <div class="cart">
+        <router-link to="/menu"><p class="back-button"><i style="color:#fff" class="fa fa-chevron-left" aria-hidden="true"></i></p></router-link>
+        <h1><b>Cart</b></h1>
+
+        <div class="cart-list">
+            <ul class="menu" v-for="(cart, index) in cartArray" :key="index">
+                <li><div class="img-box"><img :src="cart.image"></div></li>
+                <li class="details">
+                    <h3 class="name"><b>{{cart.name}}</b></h3>
+                    <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true"></i></p> 1 <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true"></i></p></h3>
+                    <h3 class="price">Price: N{{cart.price}}</h3>
+                </li>
+                <li><i class="fa fa-times-circle-o cancel" aria-hidden="true"></i></li>
+            </ul>
+        </div>
+
+        <div class="total-block">
+            <ul style="padding: 20px" class="total-row">
+                <li>Total:</li>
+                <li style="float:right">$5000</li>
+            </ul>
+            <button>Place Order</button>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    data () {
+        return {
+            cartArray: []
+        }
+    },
+    created() {
+        this.cartArray = this.$store.state.cart
+    }
+}
+
+</script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@300;500;600&display=swap');
+@import url('http://fonts.cdnfonts.com/css/euclid-circular-a');
+
+.back-button {
+    background: rgb(32,184,100);
+    text-align: center;
+    width: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 12px;
+}
+
+.cart {
+    padding: 20px;
+    font-family: 'Euclid Circular A';
+}
+.cart-list {
+    margin-bottom: 150px;
+}
+.menu {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /*border: 2px solid green;*/
+    padding: 0px;
+    position: relative;
+    padding-left: 5px;
+    /*display: flex;
+    justify-content: space-between;*/
+}
+.menu li:nth-child(1) {
+    margin-left: 0px;
+}
+.cancel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: scale(1.3);
+    color: green;
+}
+.menu li {
+    display: inline-block;
+    list-style: none;
+    /*border: 1px solid yellow;*/
+}
+.menu .img-box {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    margin-top: 10px;
+    /*border: 3px solid red*/
+}
+.menu .details {
+    /*margin-bottom: 50px;*/
+    margin-left: 5%;
+    /*border: 3px solid aqua;*/
+    max-width: 160px;
+    transform: translateY(-10px);
+}
+.menu .name {
+    font-size: 18px;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+.menu .quantity {
+    font-size: 18px;
+    transform: translateY(10px);
+}
+.menu .price {
+    font-size: 18px;
+    font-style: italic;
+    color: rgb(230, 171, 8);
+}
+.fa-minus {
+    color: green;
+    margin-right: 15px;
+}
+.fa-plus-circle {
+    color: green;
+    margin-left: 15px;
+}
+.total-block {
+    height: 150px;
+    background: rgb(32,184,100);
+    margin-left: -20px;
+    margin-right: -20px;
+    bottom: 0%;
+    position: fixed;
+    z-index: 2;
+    width: 500px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.total-row {
+    margin-left: -20px;
+    margin-right: -20px;
+}
+.total-row li {
+    display: inline-block;
+    list-style: none;
+    color: #fff;
+    font-weight: 500;
+}
+.total-block button {
+    width: 100%;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 8px;
+    border-radius: 8px;
+    background: #fff;
+    border: none;
+    transition: all 0.5s ease;
+}
+@keyframes click {
+    from {transform:scale(0.9);transition: all 0.5s ease;};
+    to {transform: scale(1);transition: all 0.5s ease;}
+}
+.total-block button:active {
+    /*transform: scale(0.8);*/
+    animation: click 0.4s ;
+    transition: all 0.5s ease;
+}
+/*.total-block button:hover {
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+}*/
+
+
+
+@media screen and (max-width: 425px) {
+    .total-block {
+        width: 100%;
+    }
+}
+</style>
