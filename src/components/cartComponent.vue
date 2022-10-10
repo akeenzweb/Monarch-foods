@@ -3,25 +3,36 @@
         <router-link to="/menu"><p class="back-button"><i style="color:#fff" class="fa fa-chevron-left" aria-hidden="true"></i></p></router-link>
         <h1><b>Cart</b></h1>
 
-        <div class="cart-list">
-            <ul class="menu" v-for="(cart, index) in cartArray" :key="index">
-                <li><div class="img-box"><img :src="cart.image"></div></li>
-                <li class="details">
-                    <h3 class="name"><b>{{cart.name}}</b></h3>
-                    <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true"></i></p> 1 <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true"></i></p></h3>
-                    <h3 class="price">Price: N{{cart.price}}</h3>
-                </li>
-                <li><i class="fa fa-times-circle-o cancel" aria-hidden="true"></i></li>
-            </ul>
-        </div>
+        <div v-if="cartArray.length > 0">
+            <div class="cart-list" >
+                <transition-group name="delete">
+                    <ul class="menu" v-for="(cart, index) in cartArray" :key="index">
+                        <li><div class="img-box"><img :src="cart.image"></div></li>
+                        <li class="details">
+                            <h3 class="name"><b>{{cart.name}}</b></h3>
+                            <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true"></i></p> 1 <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true"></i></p></h3>
+                            <h3 class="price">Price: N{{cart.price}}</h3>
+                        </li>
+                        <li><i @click="deleteMenu(index)" class="fa fa-times-circle-o cancel" aria-hidden="true"></i></li>
+                    </ul>
+                </transition-group>
+            </div>
 
-        <div class="total-block">
-            <ul style="padding: 20px" class="total-row">
-                <li>Total:</li>
-                <li style="float:right">$5000</li>
-            </ul>
-            <button>Place Order</button>
+
+            <div class="total-block">
+                <ul style="padding: 20px" class="total-row">
+                    <li>Total:</li>
+                    <li style="float:right">$5000</li>
+                </ul>
+                <button>Place Order</button>
+            </div>
         </div>
+        <transition name="empty">
+            <div style="text-align:center" v-if="cartArray.length < 1">
+                <img class="empty" src="../assets/images/empty_cart.png">
+            </div>
+        </transition>
+
     </div>
 </template>
 
@@ -35,6 +46,11 @@ export default {
     },
     created() {
         this.cartArray = this.$store.state.cart
+    },
+    methods: {
+        deleteMenu(index) {
+            this.cartArray.splice(index, 1)
+        }
     }
 }
 
@@ -114,7 +130,7 @@ export default {
     transform: translateY(10px);
 }
 .menu .price {
-    font-size: 18px;
+    font-size: 16px;
     font-style: italic;
     color: rgb(230, 171, 8);
 }
@@ -171,8 +187,34 @@ export default {
     transform: scale(0.8);
     transition: all 0.5s ease;
 }*/
+.delete-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+.delete-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+.delete-leave-active {
+  transition: all 0.4s ease;
+}
 
-
+.empty-enter-from {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.empty-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.empty-enter-active {
+  transition: all 0.8s ease;
+}
+.empty {
+    margin-top: 80px;
+    width: 100%;
+    height: 100%;
+}
 
 @media screen and (max-width: 425px) {
     .total-block {

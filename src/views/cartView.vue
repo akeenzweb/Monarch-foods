@@ -8,7 +8,7 @@
             <li>Lucy</li>
             <li>Online Now</li>
           </ul></li>
-          <li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li>
+          <li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><p class="count" style="display:inline-block;">{{cartCount}}</p><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li>
         </ul>
       </div>
       <div>
@@ -25,11 +25,19 @@
 
   export default {
     name: 'CartView',
+    data () {
+      return {
+        cartCount: 0
+      }
+    },
     components: {
       //HelloWorld
       // chatBox1,
       CartBlock
-  }
+    },
+    created () {
+      this.cartCount = this.$store.state.cart.length
+    }
   }
   </script>
 
@@ -72,6 +80,16 @@
     color: #fff;
     font-size: 12px;
     opacity: 0.8;
+  }
+  .count {
+    color: rgb(32,184,100);
+    background: rgb(247, 223, 87);
+    /*border: 2px solid rgb(137, 141, 139);*/
+    z-index: 2;
+    border-radius: 50%;
+    padding-left: 7px;
+    padding-right: 7px;
+    transform: scale(0.7) translate(10px, 15px);
   }
 
 
