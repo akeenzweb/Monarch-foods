@@ -91,35 +91,45 @@
                         price: 1500,
                         category: 'Pasteries',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1pKH7r.pa1.png'
+                        image: 'https://i.im.ge/2022/10/07/1pKH7r.pa1.png',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Spicy Macaroni',
                         price: 3500,
                         category: 'Pasta',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vEWza.pixzolo-photography-O3wkh2jZyo-unsplash.jpg'
+                        image: 'https://i.im.ge/2022/10/07/1vEWza.pixzolo-photography-O3wkh2jZyo-unsplash.jpg',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Lemonade',
                         price: 1000,
                         category: 'Drinks',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vxlYC.dr2.png'
+                        image: 'https://i.im.ge/2022/10/07/1vxlYC.dr2.png',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Egg Curlies',
                         price: 2300,
                         category: 'Breakfast',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vzjUp.ella-olsson-ZjEeMnDiq00-unsplash.jpg'
+                        image: 'https://i.im.ge/2022/10/07/1vzjUp.ella-olsson-ZjEeMnDiq00-unsplash.jpg',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Zuchini',
                         price: 4000,
                         category: 'Continental',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1v3IrM.carly-jayne-Lv174o7fn7Y-unsplash.jpg'
+                        image: 'https://i.im.ge/2022/10/07/1v3IrM.carly-jayne-Lv174o7fn7Y-unsplash.jpg',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
 
 
@@ -130,35 +140,45 @@
                         price: 1500,
                         category: 'Breakfast',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1J2mcL.18a0f53043f24eca881e945c95f1413c.jpg'
+                        image: 'https://i.im.ge/2022/10/07/1J2mcL.18a0f53043f24eca881e945c95f1413c.jpg',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Chicken Burger',
                         price: 3500,
                         category: 'Pasteries',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGFtJTIwYnVyZ2VyJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
+                        image: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGFtJTIwYnVyZ2VyJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Coffee',
                         price: 1000,
                         category: 'Drinks',
                         description: 'It is very tasty and Creamy',
-                        image: 'https://images.unsplash.com/photo-1422056244210-46cc641fb1fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw3NTk0NTV8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60'
+                        image: 'https://images.unsplash.com/photo-1422056244210-46cc641fb1fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw3NTk0NTV8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Smoothie ',
                         price: 5300,
                         category: 'Drinks',
                         description: 'It is very tasty and Creamy',
-                        image: 'https://i.im.ge/2022/10/07/1J2H0C.dr5.png'
+                        image: 'https://i.im.ge/2022/10/07/1J2H0C.dr5.png',
+                        quantity: 1,
+                        availableQuantity: 10
                     },
                     {
                         name: 'Spaghetti',
                         price: 4000,
                         category: 'Pasta',
                         description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1J2eSm.clark-douglas-17ZU9BPy-Q4-unsplash.jpg'
+                        image: 'https://i.im.ge/2022/10/07/1J2eSm.clark-douglas-17ZU9BPy-Q4-unsplash.jpg',
+                        quantity: 1,
+                        availableQuantity: 10
                     }
                 ],
                 //server: true,

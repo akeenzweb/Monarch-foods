@@ -10,8 +10,8 @@
                         <li><div class="img-box"><img :src="cart.image"></div></li>
                         <li class="details">
                             <h3 class="name"><b>{{cart.name}}</b></h3>
-                            <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true"></i></p> 1 <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true"></i></p></h3>
-                            <h3 class="price">Price: N{{cart.price}}</h3>
+                            <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true" @click="decreament(index)"></i></p> {{cart.quantity}} <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true" @click="increament(index)"></i></p></h3>
+                            <h3 class="price">Price: N{{cart.price * cart.quantity}}</h3>
                         </li>
                         <li><i @click="deleteMenu(index)" class="fa fa-times-circle-o cancel" aria-hidden="true"></i></li>
                     </ul>
@@ -22,14 +22,15 @@
             <div class="total-block">
                 <ul style="padding: 20px" class="total-row">
                     <li>Total:</li>
-                    <li style="float:right">$5000</li>
+                    <li style="float:right">{{totalPrice}}</li>
                 </ul>
-                <button>Place Order</button>
+                <button @click="placeOrder()">Place Order</button>
             </div>
         </div>
         <transition name="empty">
             <div style="text-align:center" v-if="cartArray.length < 1">
                 <img class="empty" src="../assets/images/empty_cart.png">
+                <h4 style="display: inlne-block">You're Cart is <span style="display: inlne-block;color: rgb(230, 171, 8);">Empty</span></h4>
             </div>
         </transition>
 
@@ -41,16 +42,53 @@
 export default {
     data () {
         return {
-            cartArray: []
+            cartArray: [],
+            total: 0,
+            order: {}
         }
     },
     created() {
         this.cartArray = this.$store.state.cart
+        //console.log("total =",this.total)
     },
     methods: {
         deleteMenu(index) {
             this.cartArray.splice(index, 1)
+        },
+        decreament(index) {
+            if (this.cartArray[index].quantity > 1) {
+                this.cartArray[index].quantity--
+            } else {
+                alert("Minimum quantity for " + this.cartArray[index].name + " is 1")
+            }
+        },
+        increament(index){
+            if (this.cartArray[index].quantity < this.cartArray[index].availableQuantity) {
+                this.cartArray[index].quantity++
+            } else {
+                alert("Maximum quantity for " + this.cartArray[index].name + " is reached")
+            }
+        },
+        placeOrder () {
+            console.log(this.cartArray)
+            this.total = this.totalPrice
+            console.log(this.total)
+            this.order.menuList = this.cartArray
+            this.order.totalAmount = this.total
+            console.log("order =", this.order)
+            this.$store.commit("addToOrderList", this.order)
+
+            this.$router.push('/payment')
         }
+    },
+    computed: {
+        // This computes the total price of all the prices in the quantity
+        totalPrice() {
+            return this.cartArray.reduce(function (sum, cart) {
+            return sum + (cart.price * cart.quantity)
+            }, 0)
+        },
+
     }
 }
 
@@ -179,8 +217,8 @@ export default {
     to {transform: scale(1);transition: all 0.5s ease;}
 }
 .total-block button:active {
-    /*transform: scale(0.8);*/
-    animation: click 0.4s ;
+    transform: scale(0.8);
+    /*animation: click 0.4s ;*/
     transition: all 0.5s ease;
 }
 /*.total-block button:hover {

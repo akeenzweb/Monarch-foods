@@ -8,7 +8,7 @@
             <li>Lucy</li>
             <li>Online Now</li>
           </ul></li>
-          <router-link to="/cart"><li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><p class="count" style="display:inline-block;">{{cartCount}}</p><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li></router-link>
+          <router-link to="/cart"><li style="float:right;color:#fff;margin-right:20px;margin-top:20px;"><p class="count" style="display:inline-block;">{{count}}</p><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li></router-link>
         </ul>
       </div>
       <div>
@@ -37,6 +37,11 @@
     },
     created () {
       this.cartCount = this.$store.state.cart.length
+    },
+    computed: {
+      count () {
+        return this.cartCount
+      }
     }
   }
   </script>
