@@ -78,7 +78,7 @@ export default {
             console.log("order =", this.order)
             this.$store.commit("addToOrderList", this.order)
 
-            this.$router.push('/payment')
+            this.$router.push('/location')
         }
     },
     computed: {

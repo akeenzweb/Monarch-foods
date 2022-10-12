@@ -49,6 +49,11 @@ const routes = [
     path: '/successSplash',
     name: 'successSplash',
     component: () => import('../views/sucessSplash.vue')
+  },
+  {
+    path: '/location',
+    name: 'location',
+    component: () => import('../views/locationView.vue')
   }
   //{
   //  path: '/login',

@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     cart: [],
-    orderList: []
+    orderList: [],
+    location: null
   },
   getters: {
   },
@@ -21,6 +22,9 @@ export default createStore({
     },
     addToOrderList: (state, neworder) => {
       state.orderList.push(neworder)
+    },
+    addLocation: (state, newlocation)=> {
+      state.location = newlocation
     }
   },
   actions: {
