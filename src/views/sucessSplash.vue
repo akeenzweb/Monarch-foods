@@ -1,5 +1,8 @@
 <template>
-    <div class="success-page" style="text-align:center"><img src="../assets/images/check.gif"></div>
+    <div class="success-page" style="text-align:center">
+        <img src="../assets/images/check.gif">
+        <h1 style="background:#fff;width:300px;font-size:40px;color:green;margin:auto">Your Order has been placed</h1>
+    </div>
 </template>
 
 <script>
@@ -7,7 +10,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.$router.push('/success')
-        }, 4000)
+        }, 2200)
     }
 }
 </script>

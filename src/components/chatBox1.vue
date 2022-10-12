@@ -49,9 +49,10 @@
                     'Type something ...',
                     'Sorry I don\'t understand, please, type something else',
                     'Okay, what would you like to know',
-                    'Awesome, Have a peek at our menu'
+                    'Awesome, Have a peek at our menu',
+                    'Take a look at our menu'
                 ],
-                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', ''],
+                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want'],
                 stringToken: null,
                 match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9']
             }
@@ -75,7 +76,7 @@
                 //        message: this.response[2]
                 //    })
                 //}
-                //The cose below match[] array checks if the keyword in keywords[] array is in the this.stringToken and assignes it to  match[] array if true
+                //The code below match[] array checks if the keyword in keywords[] array is in the this.stringToken and assignes it to  match[] array if true
                 this.match[0] = this.stringToken.find(v => (this.keywords[0] === v))
                 this.match[1] = this.stringToken.find(v => (this.keywords[1] === v))
                 this.match[2] = this.stringToken.find(v => (this.keywords[2] === v))
@@ -85,6 +86,8 @@
                 this.match[6] = this.stringToken.find(v => (this.keywords[6] === v))
                 this.match[7] = this.stringToken.find(v => (this.keywords[7] === v))
                 this.match[8] = this.stringToken.find(v => (this.keywords[8] === v))
+                this.match[9] = this.stringToken.find(v => (this.keywords[9] === v))
+                this.match[10] = this.stringToken.find(v => (this.keywords[10] === v))
 
                 //The code below checks if the match is equal to the given keyword and gives the bot response
                 if(this.match[0] === this.keywords[0]) {
@@ -167,7 +170,19 @@
                         })
                     }, 1500)
                     this.userInput = ''
-                } else {
+                }else if(this.match[9] === this.keywords[9] || this.match[10] === this.keywords[10] ){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[6]
+                        })
+                        setTimeout(() => {
+                            this.$router.push('/menu')
+                        }, 2000)
+                    }, 1500)
+                    this.userInput = ''
+
+                }else {
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
