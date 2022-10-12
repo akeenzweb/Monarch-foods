@@ -56,7 +56,7 @@
         <transition name="modal">
             <div v-if="addedToCart" class="added-to-cart">
                 <ul>
-                    <li style="display:inline-block"><img style="width:50px;height:50px;border-radius:50%" src="../assets/images/bot1.jpg"></li>
+                    <li style="display:inline-block"><img style="width:50px;height:50px;border-radius:50%" src="../assets/images/bot2.jpg"></li>
                     <li style="display:inline-block">{{viewItemModal.name}} is added to your <router-link to="/cart" style="color: rgb(32,184,100);">Cart</router-link></li>
                 </ul>
 

@@ -3,7 +3,7 @@
       <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
       <div class="head">
         <ul class="outter-ul">
-          <li><img class="bot-profile" src="../assets/images/bot1.jpg"></li>
+          <li><img class="bot-profile" src="../assets/images/bot2.jpg"></li>
           <li><ul class="inner-ul">
             <li>Lucy</li>
             <li>Online Now</li>

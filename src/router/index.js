@@ -40,6 +40,16 @@ const routes = [
     name: 'payment',
     component: () => import('../views/paymentView.vue')
   },
+  {
+    path: '/success',
+    name: 'success',
+    component: () => import('../views/successView.vue')
+  },
+  {
+    path: '/successSplash',
+    name: 'successSplash',
+    component: () => import('../views/sucessSplash.vue')
+  }
   //{
   //  path: '/login',
   //  name: 'login',
