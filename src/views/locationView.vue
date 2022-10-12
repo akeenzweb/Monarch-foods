@@ -29,7 +29,7 @@
                 userInputCase: null,
                 chatMessages: [
                     {status: "bot", message:  "Enter your pickup point"},
-                    {status: "bot", message:  "You can put the location of a friend if you are ordering for that friend, but ensure you send thr the Order Qr code that you'll recieve shortly"}
+                    {status: "bot", message:  "You can put the location of a friend if you are ordering for that friend, but ensure you send them the Order Qr code that you'll recieve shortly"}
                 ],
                 response: [
                     'COOL. Can i show you our menu?',
