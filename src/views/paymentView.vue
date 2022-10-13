@@ -25,7 +25,7 @@
 
       <ul class="chat">
             <li><img src="../assets/images/bot2.jpg"></li>
-            <li><h3>Almost there, please, select a payment method</h3></li>
+            <li><h3>Almost there, please select a payment method</h3></li>
       </ul>
 
     </div>

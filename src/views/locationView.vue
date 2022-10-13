@@ -13,7 +13,7 @@
 
         <!--<form>-->
             <div class="form">
-                <input v-model="location" type="text" @keyup.enter="sendMessage()"><input type="submit" value="send" @click="sendMessage()" >
+                <input v-model="location" placeholder="Enter Location" type="text" @keyup.enter="sendMessage()"><input type="submit" value="send" @click="sendMessage()" >
             </div>
 
         <!--</form>-->
@@ -24,12 +24,13 @@
     export default {
         data() {
             return {
+                value: null,
                 location: "",
                 userInput: "",
                 userInputCase: null,
                 chatMessages: [
                     {status: "bot", message:  "Enter your pickup point"},
-                    {status: "bot", message:  "You can put the location of a friend if you are ordering for that friend, but ensure you send them the Order Qr code that you'll recieve shortly"}
+                    {status: "bot", message:  "You can put the location of a friend if you are ordering for that friend, but ensure you send them the Order Qr code that you'll recieve shortly once you complete your order"}
                 ],
                 response: [
                     'COOL. Can i show you our menu?',
@@ -45,11 +46,19 @@
                 match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9']
             }
         },
+        created() {
+            this.value = this.$store.state.orderList.qrcodeId
+            console.log(this.value)
+        },
         methods: {
             sendMessage(){
-                this.$store.commit("location", this.location )
-                this.location = ""
-                this.$router.push('/payment')
+                if(this.location == ''){
+                    alert("Type in your location")
+                } else {
+                    this.$store.commit("addLocation", this.location )
+                    this.location = ""
+                    this.$router.push('/payment')
+                }
             }
 
         }

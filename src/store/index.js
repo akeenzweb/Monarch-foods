@@ -4,7 +4,8 @@ export default createStore({
   state: {
     cart: [],
     orderList: [],
-    location: null
+    location: null,
+    qrHolder: null
   },
   getters: {
   },
@@ -25,7 +26,10 @@ export default createStore({
     },
     addLocation: (state, newlocation)=> {
       state.location = newlocation
-    }
+    },
+    saveCode: (state, newCode)=>{
+      state.qrHolder = newCode
+    },
   },
   actions: {
   },

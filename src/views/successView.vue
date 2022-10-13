@@ -1,7 +1,10 @@
 <template>
     <div class="success-page">
         <div style="text-align: center"><i class="fa fa-check-circle-o fa-10x" aria-hidden="true"></i></div>
-        <div style="text-align:center;margin-top:30px"><img style="margin:auto;width: 250px;height:250px;" src="../assets/images/qr.png"></div>
+        <div style="text-align:center;margin-top:30px">
+            <!--<img style="margin:auto;width: 250px;height:250px;" src="../assets/images/qr.png">-->
+            <qrcode-vue :value="value" :size="250" level="H" />
+        </div>
         <ul class="chat">
             <li><img src="../assets/images/bot2.jpg"></li>
             <li><h3>Here's your order QR code</h3></li>
@@ -17,10 +20,24 @@
 </template>
 
 <script>
+import QrcodeVue from 'qrcode.vue'
     export default {
+        data () {
+            return {
+                value: "",
+                orderArray: []
+            }
+        },
+        created() {
+            this.value = this.$store.state.qrHolder
+            console.log("value qr = ",this.$store.state.qrHolder)
+        },
+        components: {
+            QrcodeVue
+        },
         methods: {
             okay() {
-                this.$router.push('/myorders')
+                this.$router.push('/orders')
             }
         }
     }

@@ -44,12 +44,25 @@ export default {
         return {
             cartArray: [],
             total: 0,
-            order: {}
+            order: {},
+            status: "pending",
+            date: null,
+            time: null,
+            qrcodeId: null,
+            user: "jeremy"
         }
     },
     created() {
         this.cartArray = this.$store.state.cart
         //console.log("total =",this.total)
+    },
+    computed: {
+        // This computes the total price of all the prices in the quantity
+        totalPrice() {
+            return this.cartArray.reduce(function (sum, cart) {
+            return sum + (cart.price * cart.quantity)
+            }, 0)
+        }
     },
     methods: {
         deleteMenu(index) {
@@ -70,25 +83,46 @@ export default {
             }
         },
         placeOrder () {
+            //This code generates the order qrcode id that would be used as the ID for the order
+            var char1 = Math.floor(Math.random() * 10);
+            var char2 = Math.floor(Math.random() * 10);
+            var char3 = Math.floor(Math.random() * 10);
+            var char4 = Math.floor(Math.random() * 10);
+            var char5 = Math.floor(Math.random() * 10);
+            var char6 = Math.floor(Math.random() * 10);
+            var char7 = Math.floor(Math.random() * 10);
+            this.qrcodeId = "" + char1 + char2 + char3 + char4 + char5 + char6 + char7 + this.user
+
+            //The code below gets the time the order is placed
+            var date = new Date()
+            var h = date.getHours()
+            var m = date.getMinutes()
+            var s = date.getSeconds()
+            this.time = h + ":" + m + ":" + s
+
+            var day = date.getDate()
+            var month = date.getMonth()+1
+            var year = date.getFullYear()
+            this.date = day + "/" + month + "/" + year
+
+            //This commits the data of the order to the store array as an object
             console.log(this.cartArray)
             this.total = this.totalPrice
             console.log(this.total)
             this.order.menuList = this.cartArray
             this.order.totalAmount = this.total
+            this.order.status = this.status
+            this.order.qrcodeId = this.qrcodeId
+            this.order.date = this.date
+            this.order.time = this.time
             console.log("order =", this.order)
             this.$store.commit("addToOrderList", this.order)
 
+            //This is to save the current order QR that wouyld be used in the success vuew page
+            this.$store.commit("saveCode", this.qrcodeId)
+            console.log(this.qrcodeId)
             this.$router.push('/location')
         }
-    },
-    computed: {
-        // This computes the total price of all the prices in the quantity
-        totalPrice() {
-            return this.cartArray.reduce(function (sum, cart) {
-            return sum + (cart.price * cart.quantity)
-            }, 0)
-        },
-
     }
 }
 

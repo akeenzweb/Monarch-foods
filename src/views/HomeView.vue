@@ -8,6 +8,7 @@
           <li>Lucy</li>
           <li @click="testLogin">Online Now</li>
         </ul></li>
+        <router-link to="/orders"><li><i style="color:#fff;transform:translate(100px, 10px); padding-bottom: 3px" class="fa fa-cutlery fa-2x" aria-hidden="true"></i></li></router-link>
       </ul>
     </div>
     <div>
