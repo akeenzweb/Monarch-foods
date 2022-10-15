@@ -106,9 +106,8 @@ export default {
             this.date = day + "/" + month + "/" + year
 
             //This commits the data of the order to the store array as an object
-            console.log(this.cartArray)
+            console.log("cart array", this.cartArray)
             this.total = this.totalPrice
-            console.log(this.total)
             this.order.menuList = this.cartArray
             this.order.totalAmount = this.total
             this.order.status = this.status
@@ -116,7 +115,7 @@ export default {
             this.order.date = this.date
             this.order.time = this.time
             console.log("order =", this.order)
-            this.$store.commit("addToOrderList", this.order)
+            this.$store.commit("addPartialOrder", this.order)
 
             //This is to save the current order QR that wouyld be used in the success vuew page
             this.$store.commit("saveCode", this.qrcodeId)

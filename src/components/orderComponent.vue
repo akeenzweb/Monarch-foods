@@ -31,7 +31,7 @@
                     </ul>
                     <h5 >Date: {{order.date}} | {{order.time}}</h5>
                     <ul>
-                        <li v-for="(cart, index) in cartInOrder" :key="index">{{cart.name}}({{cart.quantity}})  - {{cart.price * cart.quantity}}</li>
+                        <li v-for="(cart, index) in order" :key="index">{{cart.name}}({{cart.quantity}})  - {{cart.price * cart.quantity}}</li>
                     </ul>
                     <!--<button @click="placeOrder()">Place Order</button>-->
                 </div>
@@ -56,7 +56,7 @@ export default {
         return {
             orderArray: [],
             total: 0,
-            order: {},
+            order: [],
             cartInOrder: [],
             viewMore: false
         }
@@ -75,21 +75,23 @@ export default {
         },
 
 
-        placeOrder () {
-            console.log(this.cartArray)
-            this.total = this.totalPrice
-            console.log(this.total)
-            this.order.menuList = this.cartArray
-            this.order.totalAmount = this.total
-            console.log("order =", this.order)
-            this.$store.commit("addToOrderList", this.order)
+        //placeOrder () {
+        //    console.log(this.cartArray)
+        //    this.total = this.totalPrice
+        //    console.log(this.total)
+        //    this.order.menuList = this.cartArray
+        //    this.order.totalAmount = this.total
+        //    console.log("order =", this.order)
+        //    this.$store.commit("addToOrderList", this.order)
 
-            this.$router.push('/location')
-        },
+        //    this.$router.push('/location')
+        //},
         view(index) {
-            this.singleOrder = this.orderArray[index]
+            this.order.length = 0
+            this.order = this.orderArray[index].menuList
+            console.log("order = ", this.order)
             console.log("this.order array = ",this.orderArray)
-            this.cartInOrder = this.singleOrder.menuList
+            //this.cartInOrder = this.order.menuList
         }
     },
     computed: {

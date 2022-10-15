@@ -8,7 +8,7 @@
             <li>Lucy</li>
             <li>Online Now</li>
           </ul></li>
-          <li style="float:right;color:rgb(32,184,100);margin-right:20px;margin-top:20px;"><p class="count" style="display:inline-block;">{{count}}</p><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li>
+          <li style="float:right;color:rgb(32,184,100);margin-right:20px;margin-top:20px;"><p class="count" style="display:inline-block;"></p><i style="transform:scale(1.4)" class="fa fa-shopping-bag" aria-hidden="true"></i></li>
         </ul>
       </div>
 

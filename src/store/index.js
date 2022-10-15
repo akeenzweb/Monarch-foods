@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     cart: [],
+    partialOrder: {},
     orderList: [],
     location: null,
     qrHolder: null
@@ -30,6 +31,9 @@ export default createStore({
     saveCode: (state, newCode)=>{
       state.qrHolder = newCode
     },
+    addPartialOrder: (state, partialorder) => {
+      state.partialOrder = partialorder
+    }
   },
   actions: {
   },

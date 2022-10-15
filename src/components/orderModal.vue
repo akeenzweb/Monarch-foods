@@ -2,12 +2,15 @@
     <div class="modal-background">
         <div class="modal-block">
             <img style="float:right" @click="closeModal()" src="../assets/images/close-square.svg"><br>
+            <hr>
             <div class="details">
-                <div class="img-block"><img :src="itemViewed.image"></div>
-                <h2 class="name"><b>{{itemViewed.name}}</b></h2><br>
-                <!--<h2 class="price">{{itemViewed.price}}</h2>
-                <button>Add to Cart</button>-->
-                <h5 class="description">{{itemViewed.description}}</h5>
+                <h3>Order</h3>
+                <ul v-for="(menu, index) in menuObject" :key="index">
+                    <li>{{menu.name}}, ({{menu.quantity}})</li>
+
+                </ul>
+                <hr>
+                <h3>Total: {{total}}</h3>
             </div>
         </div>
         <!--<div class="modal">
@@ -19,7 +22,11 @@
 <script>
     export default {
         props: {
-            itemViewed: {}
+            menuObject: [],
+            total: Number
+        },
+        created() {
+            console.log("menuObject = ", this.menuObject)
         },
         methods: {
             closeModal () {
@@ -32,7 +39,7 @@
 <style scoped>
 .modal-background {
     width: 100%;
-    height: 100%;
+    height: 200%;
     background: rgba(0, 0, 0, 0.75);
     position: absolute;
     top: 0;
@@ -46,19 +53,10 @@
     overflow: hidden;
 
   }
-  .modal {
-    padding: 20px;
-    width: 250px;
-    position: absolute;
-    border-radius: 8px;
-    top: 55px;
-    background: #fff;
-    /*height: 250px;*/
-    border: 3px solid green;
-  }
+
   .modal-block {
     padding: 20px;
-    width: 80%;
+    width: 50%;
     border-radius: 8px;
     /*border: 3px solid green;*/
     /*height: 550px;*/

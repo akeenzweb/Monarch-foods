@@ -1,13 +1,26 @@
 <template>
     <div class="modal-background">
         <div class="modal-block">
-            <img style="float:right" @click="closeModal()" src="../assets/images/close-square.svg"><br>
+            <i style="float:right" @click="closeModal()" class="fa fa-times" aria-hidden="true"></i><br>
+            <!--<img style="float:right" @click="closeModal()" src="/src/assets/images/close-square.svg"><br>-->
+            <hr>
             <div class="details">
-                <div class="img-block"><img :src="itemViewed.image"></div>
-                <h2 class="name"><b>{{itemViewed.name}}</b></h2><br>
-                <!--<h2 class="price">{{itemViewed.price}}</h2>
-                <button>Add to Cart</button>-->
-                <h5 class="description">{{itemViewed.description}}</h5>
+                <h3>Edit Menu</h3>
+                <form>
+                    <input type="text" placeholder="Name of menu" v-model="name" required><br>
+                    <input type="number" placeholder="Price of menu" v-model="price" required><br>
+                    <input type="text" placeholder="Name of menu" v-model="name" required><br>
+                    <input type="text" placeholder="Category of menu" v-model="name" required><br>
+                    <input type="text" placeholder="Description of menu" v-model="name" required><br>
+                    <input type="text" placeholder="Image link of menu" v-model="name" required><br>
+                    <!--<input type="text" placeholder="Name of menu" v-model="name" required><br>-->
+                    <input type="number" placeholder="Available quantity of menu" v-model="name" required><br>
+                    <input type="boolean" placeholder="Is Available" v-model="name" required><br>
+                    <input type="submit" value="submit">
+
+                </form>
+
+
             </div>
         </div>
         <!--<div class="modal">
@@ -32,7 +45,7 @@
 <style scoped>
 .modal-background {
     width: 100%;
-    height: 100%;
+    height: 200%;
     background: rgba(0, 0, 0, 0.75);
     position: absolute;
     top: 0;
@@ -46,19 +59,10 @@
     overflow: hidden;
 
   }
-  .modal {
-    padding: 20px;
-    width: 250px;
-    position: absolute;
-    border-radius: 8px;
-    top: 55px;
-    background: #fff;
-    /*height: 250px;*/
-    border: 3px solid green;
-  }
+
   .modal-block {
     padding: 20px;
-    width: 80%;
+    width: 50%;
     border-radius: 8px;
     /*border: 3px solid green;*/
     /*height: 550px;*/
@@ -117,5 +121,26 @@
     font-size: 16px;
     font-style: italic;
     margin-left: 10px;
+}
+
+input {
+    width: 100%;
+    height: 45px;
+    margin-top: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid green;
+    color: green;
+    transition: all 0.4s ease;
+}
+input[type='submit'] {
+    background:  rgb(32,184,100);
+    color: #fff;
+}
+input:focus {
+    padding-left: 30px;
+    transform: scale(1.04);
+    transition: all 0.4s ease;
 }
 </style>

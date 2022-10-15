@@ -73,7 +73,10 @@
 </template>
 
 <script>
+    import { collection, getDocs } from "firebase/firestore"
+    import { db } from '@/firebase'
     import ViewModal from "../components/viewMenuModal.vue"
+    //import { QuerySnapshot } from '@firebase/firestore'
     export default {
         data() {
             return {
@@ -81,105 +84,105 @@
                 addedToCart: false,
                 active: [],
                 viewMenuModalArray: [],
-                categories: ['Pasteries', 'Pasta', 'Drinks', 'Breakfast', 'Continental'],
+                categories: [],
                 categories2: [],
                 selectedCategory: null,
                 filteredMenu: [],
                 menu: [
-                    {
-                        name: 'Ham Burger',
-                        price: 1500,
-                        category: 'Pasteries',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1pKH7r.pa1.png',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Spicy Macaroni',
-                        price: 3500,
-                        category: 'Pasta',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vEWza.pixzolo-photography-O3wkh2jZyo-unsplash.jpg',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Lemonade',
-                        price: 1000,
-                        category: 'Drinks',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vxlYC.dr2.png',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Egg Curlies',
-                        price: 2300,
-                        category: 'Breakfast',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1vzjUp.ella-olsson-ZjEeMnDiq00-unsplash.jpg',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Zuchini',
-                        price: 4000,
-                        category: 'Continental',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1v3IrM.carly-jayne-Lv174o7fn7Y-unsplash.jpg',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
+                    //{
+                    //    name: 'Ham Burger',
+                    //    price: 1500,
+                    //    category: 'pasteries',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1pKH7r.pa1.png',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Spicy Macaroni',
+                    //    price: 3500,
+                    //    category: 'pasta',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1vEWza.pixzolo-photography-O3wkh2jZyo-unsplash.jpg',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Lemonade',
+                    //    price: 1000,
+                    //    category: 'drinks',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1vxlYC.dr2.png',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Egg Curlies',
+                    //    price: 2300,
+                    //    category: 'breakfast',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1vzjUp.ella-olsson-ZjEeMnDiq00-unsplash.jpg',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Zuchini',
+                    //    price: 4000,
+                    //    category: 'continental',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1v3IrM.carly-jayne-Lv174o7fn7Y-unsplash.jpg',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
 
 
 
 
-                    {
-                        name: 'Breakfast Specials',
-                        price: 1500,
-                        category: 'Breakfast',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1J2mcL.18a0f53043f24eca881e945c95f1413c.jpg',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Chicken Burger',
-                        price: 3500,
-                        category: 'Pasteries',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGFtJTIwYnVyZ2VyJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Coffee',
-                        price: 1000,
-                        category: 'Drinks',
-                        description: 'It is very tasty and Creamy',
-                        image: 'https://images.unsplash.com/photo-1422056244210-46cc641fb1fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw3NTk0NTV8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Smoothie ',
-                        price: 5300,
-                        category: 'Drinks',
-                        description: 'It is very tasty and Creamy',
-                        image: 'https://i.im.ge/2022/10/07/1J2H0C.dr5.png',
-                        quantity: 1,
-                        availableQuantity: 10
-                    },
-                    {
-                        name: 'Spaghetti',
-                        price: 4000,
-                        category: 'Pasta',
-                        description: 'It is very tasty and very low in colestarol and fat',
-                        image: 'https://i.im.ge/2022/10/07/1J2eSm.clark-douglas-17ZU9BPy-Q4-unsplash.jpg',
-                        quantity: 1,
-                        availableQuantity: 10
-                    }
+                    //{
+                    //    name: 'Breakfast Specials',
+                    //    price: 1500,
+                    //    category: 'breakfast',
+                    //    description: 'Very tasty toast with baked beans, hot dogs and eggs to give you a healthy and balanced morning for your morning',
+                    //    image: 'https://i.im.ge/2022/10/07/1J2mcL.18a0f53043f24eca881e945c95f1413c.jpg',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Chicken Burger',
+                    //    price: 3500,
+                    //    category: 'pasteries',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://images.unsplash.com/photo-1521305916504-4a1121188589?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGFtJTIwYnVyZ2VyJTIwaW1hZ2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Coffee',
+                    //    price: 1000,
+                    //    category: 'drinks',
+                    //    description: 'It is very tasty and Creamy',
+                    //    image: 'https://images.unsplash.com/photo-1422056244210-46cc641fb1fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mnw3NTk0NTV8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Smoothie ',
+                    //    price: 5300,
+                    //    category: 'drinks',
+                    //    description: 'It is very tasty and Creamy',
+                    //    image: 'https://i.im.ge/2022/10/07/1J2H0C.dr5.png',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //},
+                    //{
+                    //    name: 'Spaghetti',
+                    //    price: 4000,
+                    //    category: 'pasta',
+                    //    description: 'It is very tasty and very low in colestarol and fat',
+                    //    image: 'https://i.im.ge/2022/10/07/1J2eSm.clark-douglas-17ZU9BPy-Q4-unsplash.jpg',
+                    //    quantity: 1,
+                    //    availableQuantity: 10
+                    //}
                 ],
                 //server: true,
                 //client: true,
@@ -194,9 +197,22 @@
         components: {
             ViewModal
         },
-        //mounted () {
-        //    this.categories2 = this.categories.slice(1)
-        //},
+        async mounted () {
+            //Gets the categories from firebase
+            const querySnapshot = await getDocs(collection(db, "categories"));
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+                const category = doc.data().category_name
+                this.categories.push(category)
+            });
+
+            const querySnapshot2 = await getDocs(collection(db, "menu"));
+            querySnapshot2.forEach((doc) => {
+                const menu = doc.data()
+                console.log("menu = ", menu)
+                this.menu.push(menu)
+            })
+        },
         methods: {
             sendMessage(){
 
@@ -207,7 +223,7 @@
                     //this.userInput = ''
             },
             selectCategory(index) {
-                //The code below assigns the index of the category clicked to an array called active and this the puts the active class on the index of the category
+                //The code below assigns the index of the category clicked to an array called active and this then puts the active class on the index of the category
                 this.active = []
                 this.active[index] = this.categories[index]
                 console.log(this.categories[index])

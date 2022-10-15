@@ -21,9 +21,13 @@
 </template>
 
 <script>
+    import { collection, addDoc } from "firebase/firestore";
+    import { db } from '@/firebase'
     export default {
         data() {
             return {
+                fullOrder: {},
+                partialOrder: {},
                 value: null,
                 location: "",
                 userInput: "",
@@ -48,14 +52,20 @@
         },
         created() {
             this.value = this.$store.state.orderList.qrcodeId
-            console.log(this.value)
+            this.partialOrder = this.$store.state.partialOrder
         },
         methods: {
-            sendMessage(){
+            async sendMessage(){
                 if(this.location == ''){
                     alert("Type in your location")
                 } else {
-                    this.$store.commit("addLocation", this.location )
+                    this.fullOrder = this.partialOrder
+                    this.fullOrder.location = this.location
+
+                    await addDoc(collection(db, "orders"), this.fullOrder)
+                    this.$store.commit("addToOrderList", this.fullOrder)
+                    console.log("fullOrder",this.fullOrder)
+                    //this.$store.commit("addLocation", this.location )
                     this.location = ""
                     this.$router.push('/payment')
                 }
