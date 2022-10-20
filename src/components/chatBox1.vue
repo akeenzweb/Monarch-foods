@@ -41,7 +41,7 @@
                 userInput: "",
                 userInputCase: null,
                 chatMessages: [
-                    {status: "bot", message:  "Hello handsome, I'm Lucy.  Would you like to order now or make an inquiry"}
+                    {status: "bot", message:  "Hello, I'm Lucy.  Would you like to order now or make an inquiry"}
                 ],
                 response: [
                     'COOL. Can i show you our menu?',
@@ -50,11 +50,16 @@
                     'Sorry I don\'t understand, please, type something else',
                     'Okay, what would you like to know',
                     'Awesome, Have a peek at our menu',
-                    'Take a look at our menu'
+                    'Take a look at our menu',
+                    'Our services are available from 8AM to 6PM from MONDAYS to SATURDAYS and 10AM to 9PM on SUNDAYS',
+                    'Our Menu categories include Drinks, Afrcan cuisin, Pastries, Desserts and lots more. Order now to see all our Menu',
+                    'My name is Lucy and i like monarch foods. I\'m a chatbot not a human, but i\'ll do my best to attend to your needs',
+                    'Monarch is a food deliverying company available in Lagos as of now, we do not have a physical location but we do deliver food in and around Lagos',
+                    'Hello, how are you doing? Would you like to order now',
                 ],
-                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want'],
+                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want', 'monarch', 'time', 'category', 'categories', 'yourself', 'location', 'name', 'hi', 'located'],
                 stringToken: null,
-                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9']
+                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20' ]
             }
         },
         methods: {
@@ -88,6 +93,17 @@
                 this.match[8] = this.stringToken.find(v => (this.keywords[8] === v))
                 this.match[9] = this.stringToken.find(v => (this.keywords[9] === v))
                 this.match[10] = this.stringToken.find(v => (this.keywords[10] === v))
+
+                this.match[11] = this.stringToken.find(v => (this.keywords[11] === v))
+                this.match[12] = this.stringToken.find(v => (this.keywords[12] === v))
+                this.match[13] = this.stringToken.find(v => (this.keywords[13] === v))
+                this.match[14] = this.stringToken.find(v => (this.keywords[14] === v))
+                this.match[15] = this.stringToken.find(v => (this.keywords[15] === v))
+                this.match[16] = this.stringToken.find(v => (this.keywords[16] === v))
+                this.match[17] = this.stringToken.find(v => (this.keywords[17] === v))
+                this.match[18] = this.stringToken.find(v => (this.keywords[18] === v))
+                this.match[19] = this.stringToken.find(v => (this.keywords[19] === v))
+                this.match[20] = this.stringToken.find(v => (this.keywords[20] === v))
 
                 //The code below checks if the match is equal to the given keyword and gives the bot response
                 if(this.match[0] === this.keywords[0]) {
@@ -136,15 +152,7 @@
                     this.userInput = ''
 
                 }
-                //else if(this.match[5] === this.keywords[5]){
-                //    setTimeout(() => {
-                //        this.chatMessages.push({
-                //            status: "bot",
-                //            message: this.response[4]
-                //        })
-                //    }, 1500)
-                //    this.userInput = ''
-                //}
+
                 //else if(this.match[6] === this.keywords[6]){
                 //    setTimeout(() => {
                 //        this.chatMessages.push({
@@ -182,7 +190,58 @@
                     }, 1500)
                     this.userInput = ''
 
-                }else {
+                }else if(this.match[12] === this.keywords[12]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[7]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[11] === this.keywords[11]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[10]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[15] === this.keywords[15]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[9]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[16] === this.keywords[16]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[10]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }
+                else if(this.match[18] === this.keywords[18]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[11]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[20] === this.keywords[20]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[10]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }
+
+                else {
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",

@@ -7,10 +7,11 @@
             <div class="details">
                 <h3>Edit Category</h3>
                 <form>
-                    <input type="text" placeholder="Name of Category" v-model="name" required><br>
-                    <input type="boolean" placeholder="Is Available" v-model="name" required><br>
-                    <input type="submit" value="submit">
+                    <input type="text" placeholder="Name of Category" v-model="editedCategory.name" required><br>
+                    <!--<input type="boolean" placeholder="Is Available" v-model="name" required><br>-->
+                    <!--<input type="submit" value="submit">-->
                 </form>
+                <button @click="submit(editCategory.id)">Update</button>
 
 
             </div>
@@ -22,15 +23,36 @@
 </template>
 
 <script>
+    import { doc, updateDoc } from "firebase/firestore";
+    import { db } from '@/firebase'
     export default {
         props: {
-            itemViewed: {}
+            //itemViewed: {}
+            editCategory: {}
+        },
+        data () {
+            return {
+               editedCategory: {},
+            //   categories: []
+            }
         },
         methods: {
             closeModal () {
                 this.$emit("closeModal")
+            },
+            async submit(id) {
+                await updateDoc(doc(db, "categories", id),{
+                    category_name: this.editedCategory.name
+                });
+                alert("Category updated")
             }
-        }
+        },
+        watch: {
+            // this assigns the prop to a new object
+            editCategory() {
+                this.editedCategory = this.$props.editCategory
+            }
+        },
     }
 </script>
 

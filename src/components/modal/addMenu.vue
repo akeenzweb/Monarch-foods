@@ -10,7 +10,12 @@
                     <input type="text" placeholder="Name of menu" v-model="name" required><br>
                     <input type="number" placeholder="Price of menu" v-model="price" required><br>
                     <!--<input type="text" placeholder="Name of menu" v-model="name" required><br>-->
-                    <input type="text" placeholder="Category of menu" v-model="category" required><br>
+                    <!--<input type="text" placeholder="Category of menu" v-model="category" required><br>-->
+                    <select v-model="category" required >
+                        <option value="" disabled selected>Choose Category</option>
+                        <option :value="category" v-for="(category, index) in categories" :key="index">{{category}}</option>
+
+                    </select><br>
                     <input type="text" placeholder="Description of menu" v-model="description" required><br>
                     <input type="text" placeholder="Image link of menu" v-model="image" required><br>
                     <!--<input type="text" placeholder="Name of menu" v-model="name" required><br>-->
@@ -32,7 +37,7 @@
 </template>
 
 <script>
-    import { collection, addDoc } from "firebase/firestore";
+    import { collection, addDoc, getDocs } from "firebase/firestore";
     import { db } from '@/firebase'
     export default {
         props: {
@@ -47,9 +52,20 @@
                 image: "",
                 availableQuantity: "",
                 isAvailable: "",
+                quantity: 1,
 
-                addMenu: {}
+                addMenu: {},
+                categories: []
             }
+        },
+        async mounted () {
+            //Gets the categories from firebase
+            const querySnapshot = await getDocs(collection(db, "categories"));
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+                const category = doc.data().category_name
+                this.categories.push(category)
+            });
         },
         methods: {
             closeModal () {
@@ -63,6 +79,7 @@
                 this.addMenu.image = this.image
                 this.addMenu.availableQuantity = this.availableQuantity
                 this.addMenu.isAvailable = this.isAvailable
+                this.addMenu.quantity = this.quantity
 
                 console.log("addMenu = ", this.addMenu)
                 await addDoc(collection(db, "menu"), this.addMenu)

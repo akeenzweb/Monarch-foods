@@ -20,7 +20,7 @@
                     <td style="max-width:100px"><button style="width:170px" class="btn btn-warning">{{order.time}}|{{order.date}}</button></td>
                     <td style="max-width:100px">{{order.qrcodeId}}</td>
                     <td style="max-width:100px">{{order.location}}</td>
-                    <td style="max-width:100px"><button class="btn btn-info"><i class="fa fa-check-circle-o" aria-hidden="true"></i></button></td>
+                    <td style="max-width:100px"><button @click="orderIsReady(order.id, index)" class="btn btn-info" :style="orderButtonColor ? 'background: green' : '' "><i class="fa fa-check-circle-o" aria-hidden="true"></i></button></td>
                     <transition name="modal"><orderModal :menuObject="menuListSelected" :total="total" v-show="modal" @closeModal="closeModal = modal = !modal" /></transition>
                 </tr>
 
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore"
 import { db } from '@/firebase'
 import orderModal from './orderModal.vue'
 export default {
@@ -40,6 +40,8 @@ export default {
             modal: false,
             menuListSelected: [],
             total: null,
+            orderButtonColor: false,
+            delivery: {},
             allOrders: [
                 //{
                 //    date: '12/11/22',
@@ -96,6 +98,7 @@ export default {
             querySnapshot.forEach((doc) => {
                 console.log(doc.id, " => ", doc.data());
                 const orders = doc.data()
+                orders.id = doc.id
                 this.allOrders.push(orders)
                 console.log("all orders", this.allOrders)
             });
@@ -112,6 +115,24 @@ export default {
             this.modal = true,
             this.menuListSelected = this.allOrders[index].menuList
             this.total = this.allOrders[index].totalAmount
+        },
+        async orderIsReady(id, index) {
+            // this.orderButtonColor = true
+            //alert(index)
+
+            // This Adds the Orders to the delivery collection in the database
+            this.delivery.name = "mark"
+            this.delivery.qrcodeId = this.allOrders[index].qrcodeId
+            this.delivery.location = this.allOrders[index].location
+            this.delivery.status = "processing"
+            console.log("Delivery => ", this.delivery)
+            await addDoc(collection(db, "deliveries"), this.delivery)
+
+
+            // This deletes the order from the Order page and collection
+            await deleteDoc(doc(db, "orders", id));
+
+            alert("Order has being moved to Delivery")
         }
     }
 }

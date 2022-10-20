@@ -18,43 +18,51 @@
                 <tr v-for="(category, index) in categories" :key="index">
                     <th scope="row">{{index + 1}}</th>
                     <!--<td style="max-width:100px"><img src="https://i.im.ge/2022/10/07/1pKH7r.pa1.png"></td>-->
-                    <td style="max-width:100px">{{category}}</td>
+                    <td style="max-width:100px">{{category.name}}</td>
                     <!--<td style="max-width:100px">Pasteries</td>-->
                     <td style="max-width:100px">Available</td>
-                    <td style="max-width:100px"><button @click="showModal2" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-                    <td style="max-width:100px"><button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                    <td style="max-width:100px"><button @click="showModal2(); categoryToBeEdited(index)" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                    <td style="max-width:100px"><button @click="deleteCategory(category.id)" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                 </tr>
 
             </tbody>
         </table>
         <transition name="modal"><addCategory v-show="modal" @closeModal="closeModal = modal = !modal" /></transition>
-        <transition name="modal"><editCategory v-show="modal2" @closeModal="closeModal = modal2 = !modal2" /></transition>
+        <transition name="modal"><editCategory v-show="modal2" @closeModal="closeModal = modal2 = !modal2" :editCategory="selectedIndex" /></transition>
     </div>
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs,  doc, deleteDoc } from "firebase/firestore"
 import { db } from '@/firebase'
 import addCategory from '../modal/addCategory.vue'
 import editCategory from '../modal/editCategory.vue'
 export default {
+    props: {
+
+        editCategory: {}
+    },
     data () {
         return {
             modal: false,
             modal2: false,
-            categories: []
+            categories: [],
+            selectedIndex: {}
         }
     },
     components: {
         addCategory,
         editCategory
     },
+
     async mounted () {
             //Gets the categories from firebase
             const querySnapshot = await getDocs(collection(db, "categories"));
             querySnapshot.forEach((doc) => {
                 console.log(doc.id, " => ", doc.data());
-                const category = doc.data().category_name
+                const category = {}
+                category.name = doc.data().category_name
+                category.id = doc.id
                 this.categories.push(category)
             });
         },
@@ -64,6 +72,14 @@ export default {
         },
         showModal2() {
             this.modal2 = true
+        },
+        categoryToBeEdited(index) {
+            this.selectedIndex = this.categories[index]
+            //alert(this.selectedIndex.name)
+        },
+        async deleteCategory(index) {
+            await deleteDoc(doc(db, "categories", index));
+            alert("Category Deleted")
         }
     }
 }

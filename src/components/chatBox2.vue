@@ -40,7 +40,7 @@
 
         <div class="row" style="margin-top:30px">
             <hr style="margin-bottom: 30px">
-            <p>Your Favorites</p>
+            <p>All menu</p>
 
             <ul class="menu-list">
                 <li v-for="(item, index) in menu" :key="index">

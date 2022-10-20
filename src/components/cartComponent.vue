@@ -11,7 +11,7 @@
                         <li class="details">
                             <h3 class="name"><b>{{cart.name}}</b></h3>
                             <h3 class="quantity" style="display:inline-block"><p style="display:inline-block"><i class="fa fa-minus" aria-hidden="true" @click="decreament(index)"></i></p> {{cart.quantity}} <p style="display:inline-block"><i class="fa fa-plus-circle" aria-hidden="true" @click="increament(index)"></i></p></h3>
-                            <h3 class="price">Price: N{{cart.price * cart.quantity}}</h3>
+                            <h3 class="price">Price: ₦{{cart.price * cart.quantity}}</h3>
                         </li>
                         <li><i @click="deleteMenu(index)" class="fa fa-times-circle-o cancel" aria-hidden="true"></i></li>
                     </ul>

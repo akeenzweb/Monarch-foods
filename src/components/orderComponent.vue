@@ -24,7 +24,7 @@
                 <div class="total-block order-details" style="color:#fff" v-if="viewMore">
                     <div style="text-align:center"><img src="../assets/images/line.png"></div>
                     <i @click="viewMore = !viewMore" style="color:#fff;float:right" class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                    <div style="text-align:center;margin-top:50px;"><qrcode-vue style="padding:10px;border:2px solid #fff" :value="order.qrcodeId" :size="200" level="H" /></div>
+                    <div style="text-align:center;margin-top:50px;"><qrcode-vue style="padding:10px;border:2px solid #fff" :value="orderQr" :size="200" level="H" /></div>
                     <ul style="padding: 20px" class="total-row">
                         <li>Total:</li>
                         <li style="float:right">{{order.totalAmount}}</li>
@@ -57,6 +57,7 @@ export default {
             orderArray: [],
             total: 0,
             order: [],
+            orderQr: null,
             cartInOrder: [],
             viewMore: false
         }
@@ -88,6 +89,7 @@ export default {
         //},
         view(index) {
             this.order.length = 0
+            this.orderQr = this.orderArray[index].qrcodeId
             this.order = this.orderArray[index].menuList
             console.log("order = ", this.order)
             console.log("this.order array = ",this.orderArray)

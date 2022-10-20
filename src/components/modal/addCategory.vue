@@ -8,9 +8,10 @@
                 <h3>Add Category</h3>
                 <form>
                     <input type="text" placeholder="Name of Category" v-model="name" required><br>
-                    <input type="boolean" placeholder="Is Available" v-model="name" required><br>
-                    <input type="submit" value="submit">
+                    <!--<input type="boolean" placeholder="Is Available" v-model="isAvailable" required><br>-->
+                    <input @click="addCategory()" type="submit" value="submit">
                 </form>
+                <button @click="addCategory()">submit</button>
 
 
             </div>
@@ -22,13 +23,28 @@
 </template>
 
 <script>
+    import { collection, addDoc } from "firebase/firestore";
+    import { db } from '@/firebase'
     export default {
         props: {
             itemViewed: {}
         },
+        data () {
+            return {
+                name: "",
+                isAvailable: "",
+                addNewCategory: {}
+            }
+        },
         methods: {
             closeModal () {
                 this.$emit("closeModal")
+            },
+            async addCategory() {
+                this.addNewCategory.category_name = this.name
+                //this.addNewCategory.isAvailable = this.isAvailable
+                await addDoc(collection(db, "categories"), this.addNewCategory)
+                alert("Category Added")
             }
         }
     }

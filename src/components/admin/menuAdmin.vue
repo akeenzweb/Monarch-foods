@@ -23,19 +23,20 @@
                     <td style="max-width:100px">{{menu.category}}</td>
                     <td style="max-width:100px">{{menu.isAvailable}}</td>
                     <td style="max-width:100px">{{menu.price}}</td>
-                    <td style="max-width:100px"><button @click="showModal2" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
-                    <td style="max-width:100px"><button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                    <td style="max-width:100px"><button @click="showModal2(); menuToBeEdited(index)" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
+                    <td style="max-width:100px"><button class="btn btn-danger" @click="deleteMenu(menu.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                 </tr>
 
             </tbody>
         </table>
         <transition name="modal"><addMenu v-show="modal" @closeModal="closeModal = modal = !modal" /></transition>
-        <transition name="modal"><editMenu v-show="modal2" @closeModal="closeModal = modal2 = !modal2" /></transition>
+        <transition name="modal"><editMenu v-show="modal2" @closeModal="closeModal = modal2 = !modal2" :editMenu="selectedIndex" /></transition>
     </div>
 </template>
 
 <script>
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore"
+
 import { db } from '@/firebase'
 import addMenu from '../modal/addMenu.vue'
 import editMenu from '../modal/editMenu.vue'
@@ -44,7 +45,8 @@ export default {
         return {
             modal: false,
             modal2: false,
-            menus: []
+            menus: [],
+            selectedIndex: {}
         }
     },
     components: {
@@ -57,6 +59,7 @@ export default {
             const querySnapshot = await getDocs(collection(db, "menu"));
             querySnapshot.forEach((doc) => {
                 const menu = doc.data()
+                menu.id = doc.id
                 console.log("menu = ", menu)
                 this.menus.push(menu)
             })
@@ -67,6 +70,16 @@ export default {
         },
         showModal2() {
             this.modal2 = true
+        },
+        menuToBeEdited(index) {
+            this.selectedIndex = this.menus[index]
+            //alert(this.selectedIndex.name)
+        },
+        async deleteMenu(index) {
+            //var id = index.toString()
+            await deleteDoc(doc(db, "menu", index));
+            //alert('deleted')
+            alert("delete clicked")
         }
     }
 }

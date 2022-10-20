@@ -16,7 +16,9 @@
         <div class="contents">
             <transition name="page"><orderAdmin v-show="orders" /></transition>
             <transition name="page"><menuAdmin v-show="menu" /></transition>
-            <transition name="page" appear="" mode="in-out"><categoryAdmin v-show="categories" /></transition>
+            <transition name="page"><categoryAdmin v-show="categories" /></transition>
+            <transition name="page"><deliveryAdmin v-show="delivery" /></transition>
+            <transition name="page"><historyAdmin v-show="history" /></transition>
             <!--<h1>Orders jbljljbb nlwnlnbnlwflwewe lelknlknflknlkenlk knlnnlnlnkd lnlknlkdnlnlkd lknlknlqndlndln</h1>-->
         </div>
     </div>
@@ -26,6 +28,8 @@
 import orderAdmin from '/src/components/orderAdmin.vue'
 import menuAdmin from '/src/components/admin/menuAdmin'
 import categoryAdmin from '/src/components/admin/categoryAdmin'
+import deliveryAdmin from '/src/components/admin/deliveryAdmin'
+import historyAdmin from '/src/components/admin/historyAdmin'
 export default {
     data () {
         return {
@@ -41,7 +45,9 @@ export default {
     components: {
         orderAdmin,
         menuAdmin,
-        categoryAdmin
+        categoryAdmin,
+        deliveryAdmin,
+        historyAdmin
     },
     methods: {
         selectOrder() {
@@ -69,6 +75,24 @@ export default {
             this.delivery = false
             this.chart = false
             this.history = false
+            this.logout = false
+        },
+        selectDelivery() {
+            this.orders = false
+            this.menu = false
+            this.categories = false
+            this.delivery = true
+            this.chart = false
+            this.history = false
+            this.logout = false
+        },
+        selectHistory() {
+            this.orders = false
+            this.menu = false
+            this.categories = false
+            this.delivery = false
+            this.chart = false
+            this.history = true
             this.logout = false
         }
     }
