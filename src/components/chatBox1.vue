@@ -62,6 +62,13 @@
                 match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20' ]
             }
         },
+        mounted() {
+            if(!this.$store.state.loadSplashScreen) {
+                this.$store.state.loadSplashScreen = true
+                this.$router.push('/splash')
+            }
+
+        },
         methods: {
             sendMessage(){
 
