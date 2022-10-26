@@ -197,19 +197,20 @@
                     }, 1500)
                     this.userInput = ''
 
-                }else if(this.match[12] === this.keywords[12]){
-                    setTimeout(() => {
-                        this.chatMessages.push({
-                            status: "bot",
-                            message: this.response[7]
-                        })
-                    }, 1500)
-                    this.userInput = ''
                 }else if(this.match[11] === this.keywords[11]){
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
                             message: this.response[10]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }
+                else if(this.match[12] === this.keywords[12]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[7]
                         })
                     }, 1500)
                     this.userInput = ''

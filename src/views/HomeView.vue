@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <div class="head">
+    <div class="head" style="position: relative;">
       <ul class="outter-ul">
         <li><img class="bot-profile" src="../assets/images/bot2.jpg"></li>
         <li><ul class="inner-ul">
           <li>Lucy</li>
           <li @click="testLogin">Online Now</li>
         </ul></li>
-        <router-link to="/orders"><li><i style="color:#fff;transform:translate(100px, 10px); padding-bottom: 3px" class="fa fa-cutlery fa-2x" aria-hidden="true"></i></li></router-link>
+        <router-link to="/orders"><li><i style="color:#fff;transform:translate(180px, 10px);right: 20px; padding-bottom: 3px" class="fa fa-cutlery fa-2x" aria-hidden="true"></i></li></router-link>
       </ul>
     </div>
     <div>
