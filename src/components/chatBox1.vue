@@ -25,7 +25,7 @@
 
         <!--<form>-->
             <div class="form">
-                <input v-model="userInput" type="text" @keyup.enter="sendMessage(); analyzeMessage();"><input type="submit" value="send" @click="sendMessage(); analyzeMessage();" >
+                <input v-model="userInput" type="text" @keyup.enter="sendMessage(); analyzeMessage();"><input type="submit" value="Send" @click="sendMessage(); analyzeMessage();" >
             </div>
 
         <!--</form>-->
@@ -56,10 +56,13 @@
                     'My name is Lucy and i like monarch foods. I\'m a chatbot not a human, but i\'ll do my best to attend to your needs',
                     'Monarch is a food deliverying company available in Lagos as of now, we do not have a physical location but we do deliver food in and around Lagos',
                     'Hello, how are you doing? Would you like to order now',
+                    'We offer Cash payment and wallet payment, though as of now, we advise you to pay with cash as we are still working on our wallet payment',
+                    'Appreciate the complement',
+                    'Sup'
                 ],
-                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want', 'monarch', 'time', 'category', 'categories', 'yourself', 'location', 'name', 'hi', 'located'],
+                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want', 'monarch', 'time', 'category', 'categories', 'yourself', 'location', 'name', 'hi', 'located', 'payment', 'no', 'pay', 'food', 'menu', 'serve', 'inquiries', 'wow', 'cool', 'hey'],
                 stringToken: null,
-                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20' ]
+                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20', 'match21', 'match22', 'match23', 'match24', 'match25', 'match26', 'match27', 'match28', 'martch29', 'match30']
             }
         },
         mounted() {
@@ -112,8 +115,18 @@
                 this.match[19] = this.stringToken.find(v => (this.keywords[19] === v))
                 this.match[20] = this.stringToken.find(v => (this.keywords[20] === v))
 
+                this.match[21] = this.stringToken.find(v => (this.keywords[21] === v))
+                this.match[22] = this.stringToken.find(v => (this.keywords[22] === v))
+                this.match[23] = this.stringToken.find(v => (this.keywords[23] === v))
+                this.match[24] = this.stringToken.find(v => (this.keywords[24] === v))
+                this.match[25] = this.stringToken.find(v => (this.keywords[25] === v))
+                this.match[26] = this.stringToken.find(v => (this.keywords[26] === v))
+                this.match[27] = this.stringToken.find(v => (this.keywords[27] === v))
+                this.match[28] = this.stringToken.find(v => (this.keywords[28] === v))
+                this.match[29] = this.stringToken.find(v => (this.keywords[29] === v))
+
                 //The code below checks if the match is equal to the given keyword and gives the bot response
-                if(this.match[0] === this.keywords[0]) {
+                if(this.match[0]) {
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
@@ -121,7 +134,7 @@
                         })
                     }, 1500)
                     this.userInput = ''
-                } else if(this.match[1] === this.keywords[1]){
+                } else if(this.match[1] || this.match[21] || this.match[26]){
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
@@ -129,7 +142,7 @@
                         })
                     }, 1500)
                     this.userInput = ''
-                } else if(this.match[2] === this.keywords[2]){
+                } else if(this.match[2]){
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
@@ -146,7 +159,7 @@
                         })
                     }, 1500)
                     this.userInput = ''
-                } else if(this.match[4] === this.keywords[4] || this.match[5] === this.keywords[5] || this.match[6] === this.keywords[6] ){
+                } else if(this.match[4] || this.match[5] || this.match[6] || this.match[23] || this.match[24] || this.match[25]){
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
@@ -239,11 +252,35 @@
                         })
                     }, 1500)
                     this.userInput = ''
-                }else if(this.match[20] === this.keywords[20]){
+                }else if(this.match[19] === this.keywords[19]){
                     setTimeout(() => {
                         this.chatMessages.push({
                             status: "bot",
                             message: this.response[10]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[20] || this.match[22]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[12]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[27] || this.match[28]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[13]
+                        })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[29]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[14]
                         })
                     }, 1500)
                     this.userInput = ''
