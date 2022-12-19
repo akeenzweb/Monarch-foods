@@ -113,6 +113,7 @@ export default {
 
             //Delete the order from delivries
             await deleteDoc(doc(db, "deliveries", this.orderToComplete.id))
+            window.location.reload();
         }
     }
 }

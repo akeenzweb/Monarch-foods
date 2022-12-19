@@ -7,7 +7,7 @@
             </table>
         </transition-group>
 
-        <div class="row">
+        <div class="row" style="position:relative">
             <!--<ul class="category">
               <li class="active-btn">{{categories[0]}}</li>
               <li  v-for="(category, index) in categories2" :key="index">{{category}}</li>
@@ -15,12 +15,13 @@
             <ul class="category">
                 <li :class="active[index] ? 'active-btn' : ''" @click="selectCategory(index)" v-for="(category, index) in categories" :key="index">{{category}}</li>
             </ul>
+            <img style="height:40px; width: 40px; opacity:0.75; position: absolute; border-radius: 50%; top:30%;right: 10%;" src="../assets/images/right-arrow.jpg">
 
-            <transition-group tag="ul" name="menu" appear="" class="menu-list">
+            <transition-group tag="ul" name="menu" appear="" class="menu-list" >
                 <li v-for="(item, index) in filteredMenu" :key="index">
                     <h1 class="image-box"><img :src="item.image"></h1><br>
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
-                    <h2 class="price">${{item.price}}</h2><br>
+                    <h2 class="price">₦{{item.price}}</h2><br>
                     <button @click="addToCartFiltered(index)">Add to Cart</button>
                     <h5 class="view" @click="viewClickedFilteredMenu(index); modal = !modal">View</h5>
                 </li>
@@ -38,15 +39,15 @@
 
         </div>
 
-        <div class="row" style="margin-top:30px">
+        <div class="row" style="margin-top:30px;position:relative">
             <hr style="margin-bottom: 30px">
             <p>All menu</p>
-
-            <ul class="menu-list">
+            <img style="height:40px; width:40px;border-radius: 50%;opacity: 0.75;position: absolute;right: 10%;top: 40%;" src="../assets/images/right-arrow.jpg">
+            <ul class="menu-list" >
                 <li v-for="(item, index) in menu" :key="index">
                     <h1 class="image-box"><img :src="item.image"></h1><br>
                     <h2 class="name"><b>{{item.name}}</b></h2><br>
-                    <h2 class="price">${{item.price}}</h2><br>
+                    <h2 class="price">₦{{item.price}}</h2><br>
                     <button @click="addToCart(index)">Add to Cart</button>
                     <h5 class="view" @click="viewClickedMenu(index); modal = !modal">View</h5>
                 </li>
