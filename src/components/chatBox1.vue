@@ -58,11 +58,12 @@
                     'Hello, how are you doing? Would you like to order now',
                     'We offer Cash payment and wallet payment, though as of now, we advise you to pay with cash as we are still working on our wallet payment',
                     'Appreciate the complement',
-                    'Sup'
+                    'Sup',
+                    'Take a look at our menu to view the cost of each meal'
                 ],
-                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want', 'monarch', 'time', 'category', 'categories', 'yourself', 'location', 'name', 'hi', 'located', 'payment', 'no', 'pay', 'food', 'menu', 'serve', 'inquiries', 'wow', 'cool', 'hey'],
+                keywords: ['order', 'inquiry', 'takeout', 'delivery', 'okay', 'sure', 'yes', 'hello', '', 'have', 'want', 'monarch', 'time', 'category', 'categories', 'yourself', 'location', 'name', 'hi', 'located', 'payment', 'no', 'pay', 'food', 'menu', 'serve', 'inquiries', 'wow', 'cool', 'hey', 'cost'],
                 stringToken: null,
-                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20', 'match21', 'match22', 'match23', 'match24', 'match25', 'match26', 'match27', 'match28', 'martch29', 'match30']
+                match: ['match1', 'match2', 'match3', 'match4', 'match5', 'match6', 'match7', 'match8', 'match9', 'match10', 'match11', 'match12', 'match13', 'match14', 'match115', 'match16', 'match17', 'match18', 'match19', 'match20', 'match21', 'match22', 'match23', 'match24', 'match25', 'match26', 'match27', 'match28', 'martch29', 'match30', 'match31']
             }
         },
         mounted() {
@@ -124,6 +125,7 @@
                 this.match[27] = this.stringToken.find(v => (this.keywords[27] === v))
                 this.match[28] = this.stringToken.find(v => (this.keywords[28] === v))
                 this.match[29] = this.stringToken.find(v => (this.keywords[29] === v))
+                this.match[30] = this.stringToken.find(v => (this.keywords[30] === v))
 
                 //The code below checks if the match is equal to the given keyword and gives the bot response
                 if(this.match[0]) {
@@ -282,6 +284,17 @@
                             status: "bot",
                             message: this.response[14]
                         })
+                    }, 1500)
+                    this.userInput = ''
+                }else if(this.match[30]){
+                    setTimeout(() => {
+                        this.chatMessages.push({
+                            status: "bot",
+                            message: this.response[15]
+                        })
+                        setTimeout(() => {
+                            this.$router.push('/menu')
+                        }, 2000)
                     }, 1500)
                     this.userInput = ''
                 }

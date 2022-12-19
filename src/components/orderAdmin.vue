@@ -15,7 +15,7 @@
             <tbody>
                 <tr v-for="(order, index) in allOrders" :key="index">
                     <th scope="row">{{index + 1}}</th>
-                    <td style="max-width:100px">Mark </td>
+                    <td style="max-width:100px"> {{order.username}} </td>
                     <td style="max-width:100px"><button class="btn btn-success" @click="showModal(index)">View</button></td>
                     <td style="max-width:100px"><button style="width:170px" class="btn btn-warning">{{order.time}}|{{order.date}}</button></td>
                     <td style="max-width:100px">{{order.qrcodeId}}</td>
@@ -121,7 +121,7 @@ export default {
             //alert(index)
 
             // This Adds the Orders to the delivery collection in the database
-            this.delivery.name = "mark"
+            this.delivery.name = this.allOrders[index].username
             this.delivery.qrcodeId = this.allOrders[index].qrcodeId
             this.delivery.location = this.allOrders[index].location
             this.delivery.status = "processing"

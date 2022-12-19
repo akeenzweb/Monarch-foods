@@ -13,6 +13,7 @@
 
         <!--<form>-->
             <div class="form">
+                <input v-model="userName" placeholder="Enter Full Name" type="text">
                 <input v-model="location" placeholder="Enter Location" type="text" @keyup.enter="sendMessage()"><input type="submit" value="send" @click="sendMessage()" >
             </div>
 
@@ -30,6 +31,7 @@
                 partialOrder: {},
                 value: null,
                 location: "",
+                userName: "",
                 userInput: "",
                 userInputCase: null,
                 chatMessages: [
@@ -61,12 +63,14 @@
                 } else {
                     this.fullOrder = this.partialOrder
                     this.fullOrder.location = this.location
+                    this.fullOrder.username = this.userName
 
                     await addDoc(collection(db, "orders"), this.fullOrder)
                     this.$store.commit("addToOrderList", this.fullOrder)
                     console.log("fullOrder",this.fullOrder)
                     //this.$store.commit("addLocation", this.location )
                     this.location = ""
+                    this.userName = ""
                     this.$router.push('/payment')
                 }
             }
